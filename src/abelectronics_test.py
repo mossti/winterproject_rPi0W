@@ -18,27 +18,60 @@ high = 410
 i = 1
 
 
-while i < 13:
-	pwm.set_pwm(i, 0, mid)
+def angle_convert(angle):
+	pulse_range = (2.0 - 1.0)
+	pw_per_deg = (pulse_range/181)
+	pulse_width = int((1.0 + (pw_per_deg*angle))*low)
+	print pulse_width
+	return pulse_width
 
-	time.sleep(ts)
+def three_angle(a1, a2, a3):
+	angle1 = angle_convert(a1)
+	angle2 = angle_convert(a2)
+	angle3 = angle_convert(a3)
+	
+	servochoice = int(input('Servo to cycle: '))
+	
+	pwm.set_pwm(servochoice, 0, angle1)
+	pwm.set_pwm(servochoice+1, 0, angle2)
+	pwm.set_pwm(servochoice+2, 0, angle3)
 
-	pwm.set_pwm(i, 0, low)
+def servo_test():
+	while i < 13:
 
-	time.sleep(ts)
+		pwm.set_pwm(i, 0, mid)
 
-	pwm.set_pwm(i, 0, mid)
+		time.sleep(ts)
 
-	time.sleep(ts)
+		pwm.set_pwm(i, 0, low)
 
-	pwm.set_pwm(i, 0, high)
+		time.sleep(ts)
 
-	time.sleep(ts)
+		pwm.set_pwm(i, 0, mid)
 
-	pwm.set_pwm(i, 0, mid)
+		time.sleep(ts)
 
-	i += 1
+		pwm.set_pwm(i, 0, high)
+
+		time.sleep(ts)
+
+		pwm.set_pwm(i, 0, mid)
+
+		time.sleep(ts)
+
+		i += 1
 
 
+def main():
+	test = int(input('servotest[0]/3angles[1]: '))
+	if test == 0:
+		servo_test()
+	if test ==1:
+		ang1 = int(input('First angle: '))
+		ang2 = int(input('Second angle: '))
+		ang3 = int(input('Third angle: '))
+		three_angles(ang1, ang2, ang3)
 
 
+if __name__=='__main__':
+	main()

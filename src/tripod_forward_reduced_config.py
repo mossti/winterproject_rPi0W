@@ -1,21 +1,46 @@
-from adafruit_servokit import ServoKit
+#!/usr/bin/env python
+import roslib
+import rospy
+import geometry_msgs.msg
+import std_msgs.msg
+from ServoPi import PWM
 import time
 import math
 
-kit = ServoKit(channels=16)
+pwm = PWM(0x40)
+pwm.set_pwm_freq(50)
+
+ts = 0.2
+
+low = 205
+mid = 307
+high = 410
+
+def angle_convert(angle):
+	pulse_range = (2.0 - 1.0)
+	pw_per_deg = (pulse_range/181)
+	pulse_width = int(((1.0) + (angle*(pw_per_deg)))*low)
+	print pulse_width
+	return pulse_width
 
 def hip_move(tripod,user_angle_hiplist):
-	ii=tripod
-	kit.servo[ii].angle = int(user_angle_hiplist[0])
-	kit.servo[ii+2].angle = int(user_angle_hiplist[1])
-	kit.servo[ii+4].angle = int(user_angle_hiplist[2])
+	angle_1 = angle_convert(user_angle_hiplist[0])
+	angle_2 = angle_convert(user_angle_hiplist[1])
+	angle_3 = angle_convert(user_angle_hiplist[2])
+	ii=tripod+1
+	pwm.set_pwm(ii, 0, angle_1)
+	pwm.set_pwm((ii+2), 0, angle_2)
+	pwm.set_pwm((ii+4), 0, angle_3)
 
 
 def knee_move(tripod,user_angle_kneelist):
-	jj=tripod+6
-	kit.servo[jj].angle = int(user_angle_kneelist[0])
-	kit.servo[jj+2].angle = int(user_angle_kneelist[1])
-	kit.servo[jj+4].angle = int(user_angle_kneelist[2])
+	angle_1 = angle_convert(user_angle_kneelist[0])
+	angle_2 = angle_convert(user_angle_kneelist[1])
+	angle_3 = angle_convert(user_angle_kneelist[2])
+	jj=tripod+6+1
+	pwm.set_pwm(jj, 0, angle_1)
+	pwm.set_pwm((jj+2), 0, angle_2)
+	pwm.set_pwm((jj+4), 0, angle_3)
 
 def turn_config():
 	trialnum = 0
@@ -28,10 +53,10 @@ def turn_config():
 		kneestance = int(input('\nMax. Stance angle of knee: '))
 		kneerise = int(input('\nMax. rise angle of knee: '))
 		stridelength = int(input('\nMax width (angle) of gait: '))
-		direction = int(input('\nDirection of turn [1/-1]: '))
+		turn_direction = int(input('\nDirection of turn [1/-1]: '))
 		numturns = int(input('\nNumber of turns: '))
 		velocity = float(input('\nVelocity: '))
-		direction = input('\nforward or backward: ')
+		direction = int(input('\nforward[0]/right[1]/backward[2]/left[3]: '))
 		i=1
 		j=-1
 
@@ -104,7 +129,7 @@ def turn_config():
 		#hiplist1 = [hip7, hip8, hip9, hip10, hip11, hip12, hip13, hip14, hip1, hip2, hip3, hip4, hip5, hip6]
 		#kneelist1 = [knee7, knee8, knee9, knee10, knee11, knee12, knee13, knee14, knee1, knee2, knee3, knee4, knee5, knee6]
 		
-		if direction == 'forward':
+		if direction == 0:
 
 			hiplist0 = [hip0,hip1,hip2,hip3]
 			kneelist0 = [knee0,knee1,knee2,knee3]
@@ -127,7 +152,7 @@ def turn_config():
 					j+=1
 
 
-		if direction == 'backward':
+		if direction == 1:
 
 
 			hiplist0 = [hip0,hip1,hip2,hip3]
@@ -150,7 +175,7 @@ def turn_config():
 					time.sleep(velocity)
 					j+=1
 
-		if direction == 'right':
+		if direction == 2:
 
 
 			hiplist0 = [hip0,(0.5*(hip0+hip1)),hip1,(0.5*(hip1+hip2)),hip2,(0.5*(hip2+hip3)),hip3,(0.5*(hip3+hip0))]
@@ -184,7 +209,7 @@ def turn_config():
 					j+=1
 
 
-		if direction == 'left':
+		if direction == 3:
 
 
 			hiplist0 = [hip0,(0.5*(hip0+hip1)),hip1,(0.5*(hip1+hip2)),hip2,(0.5*(hip2+hip3)),hip3,(0.5*(hip3+hip0))]
