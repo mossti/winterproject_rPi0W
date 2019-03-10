@@ -7,7 +7,7 @@ pwm = PWM(0x40)
 pwm.set_pwm_freq(50)
 
 
-ts = 0.2
+ts = 1
 
 #output_enable()
 
@@ -25,7 +25,7 @@ def angle_convert(angle):
 	print pulse_width
 	return pulse_width
 
-def three_angle(a1, a2, a3):
+def three_angles(a1, a2, a3):
 	angle1 = angle_convert(a1)
 	angle2 = angle_convert(a2)
 	angle3 = angle_convert(a3)
@@ -33,10 +33,14 @@ def three_angle(a1, a2, a3):
 	servochoice = int(input('Servo to cycle: '))
 	
 	pwm.set_pwm(servochoice, 0, angle1)
-	pwm.set_pwm(servochoice+1, 0, angle2)
-	pwm.set_pwm(servochoice+2, 0, angle3)
+	time.sleep(ts)
+	pwm.set_pwm(servochoice, 0, angle2)
+	time.sleep(ts)
+	pwm.set_pwm(servochoice, 0, angle3)
+	time.sleep(ts)
 
 def servo_test():
+	i = 1
 	while i < 13:
 
 		pwm.set_pwm(i, 0, mid)

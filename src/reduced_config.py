@@ -56,7 +56,7 @@ def turn_config():
 		turn_direction = int(input('\nDirection of turn [1/-1]: '))
 		numturns = int(input('\nNumber of turns: '))
 		velocity = float(input('\nVelocity: '))
-		direction = int(input('\nforward[0]/right[1]/backward[2]/left[3]: '))
+		direction = int(input('\nforward[0]/right[1]/backward[2]/left[3]/turn[4]: '))
 		i=1
 		j=-1
 
@@ -128,6 +128,52 @@ def turn_config():
 		#kneelist0 = [knee1, knee2, knee3, knee4, knee5, knee6, knee7, knee8, knee9, knee10, knee11, knee12, knee13, knee14]
 		#hiplist1 = [hip7, hip8, hip9, hip10, hip11, hip12, hip13, hip14, hip1, hip2, hip3, hip4, hip5, hip6]
 		#kneelist1 = [knee7, knee8, knee9, knee10, knee11, knee12, knee13, knee14, knee1, knee2, knee3, knee4, knee5, knee6]
+		
+		# turn values
+		hip0t = hipmid
+		knee0t = kneestance
+		
+		hip1t = hipmid - turn_direction*(halfstancestride)
+		knee1t = knee0t
+
+		hip2t = hip1t - turn_direction*(halfcornerstride)
+		knee2t = knee1t + halfcornerrise
+
+		hip3t = hip2t - turn_direction*(halfcornerstride)
+		knee3t = knee2t + halfcornerrise
+
+		hip4t = hip3t
+		knee4t = knee3t + midheightrise
+
+ 		hip5t = hip2t
+		knee5t = knee4t + halfcornerrise
+		
+		hip6t = hip1t
+		knee6t = knee5t + halfcornerrise
+
+		hip7t = hip0t
+		knee7t = knee6t
+
+		hip8t = hip0t + turn_direction*(halfstancestride)
+		knee8t = knee7t
+
+		hip9t = hip8t + turn_direction*(halfcornerstride)
+		knee9t = knee5t
+
+		hip10t = hip9t + turn_direction*(halfcornerstride)
+		knee10t = knee4t
+
+		hip11t = hip10t
+		knee11t = knee3t
+
+		hip12t = hip9t
+		knee12t = knee2t
+
+		hip13t = hip8t
+		knee13t = knee0t
+
+		hip14t = hip0t
+		knee14t = knee0t
 		
 		if direction == 0:
 
@@ -241,6 +287,23 @@ def turn_config():
 					knee_move(1,(OAkneelist1[j],kneelist1r[j],kneelist1r[j]))
 					time.sleep(velocity)
 					j+=1
+
+		if direction == 4:
+			hiplist0t = [hip14t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip2t,hip3t,hip4t,hip5t,hip6t,hip7t,hip8t,hip9t,hip10t,hip11t,hip12t,hip13t]
+			kneelist0t = [knee14t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee2t,knee3t,knee4t,knee5t,knee6t,knee7t,knee8t,knee9t,knee10t,knee11t,knee12t,knee13t]
+			hiplist1t = [hip3t,hip4t,hip5t,hip6t,hip7t,hip8t,hip9t,hip10t,hip11t,hip12t,hip13t,hip14t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip1t,hip2t]
+			kneelist1t = [knee3t,knee4t,knee5t,knee6t,knee7t,knee8t,knee9t,knee10t,knee11t,knee12t,knee13t,knee14t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee1t,knee2t]
+
+			while num<=numturns:
+				j = 0
+				while j<=21:
+					hip_move(0,(hiplist0t[j],hiplist0t[j],hiplist0t[j]))
+					knee_move(0,(kneelist0t[j],kneelist0t[j],kneelist0t[j]))
+					hip_move(1,(hiplist1t[j],hiplist1t[j],hiplist1t[j]))
+					knee_move(1,(kneelist1t[j],kneelist1t[j],kneelist1t[j]))
+					time.sleep(velocity)
+					j+=1
+
 
 		trialnum+=1
 

@@ -7,13 +7,15 @@ from geometry_msgs.msg import Twist
 
 
 def callback(data):
-	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data)
+	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.buttons)
+
 
 def listener():
 
 	rospy.init_node('listener',anonymous=True)
-	rospy.Subscriber("joy", Joy, callback)
+	jsinput = rospy.Subscriber('/joy', Joy, callback)
 	
+	print jsinput
 
 	rospy.spin()
 
