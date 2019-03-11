@@ -1,4 +1,4 @@
-ls#!/usr/bin/env python
+#!/usr/bin/env python
 import roslib
 import rospy
 import geometry_msgs.msg
@@ -182,39 +182,157 @@ def turn_config():
 		#knee3r = knee0r
 
 		# values for gait cycle when leg is on-angle of direction
-		OAhip0 = hipmid
-		OAknee0 = kneestance + 10
-		OAhip1 = hipmid - 0.5*i*(halfstancestride)
-		OAknee1 = kneestance #OAknee0
-		OAhip2 = hipmid - i*(halfstancestride)
-		OAknee2 = kneestance #OAknee0
-		OAhip3 = hipmid - 0.5*i*(halfstancestride)
-		OAknee3 = kneerise
-		OAhip4 = OAhip0
-		OAknee4 = kneestance #OAknee0
-		OAhip5 = hipmid + 0.5*i*(halfstancestride)
-		OAknee5 = kneestance
-		OAhip6 = hipmid + i*(halfstancestride)
-		OAknee6 = kneestance #OAknee0
-		OAhip7 = hipmid + 0.5*i*(halfstancestride)
-		OAknee7 = kneerise #OAknee0
+
+
+		OAhip0x = hipmid
+		OAknee0x = kneestance + 20
+		OAhip1x = hipmid - i*(halfstancestride)
+		OAknee1x = kneestance
+		OAhip2x = OAhip1x - i*(halfcornerstride)
+		OAknee2x = OAknee1x + halfcornerrise
+		OAhip3x = OAhip2x - i*(halfcornerstride)
+		OAknee3x = OAknee2x + halfcornerrise
+		OAhip4x = OAhip3x
+		OAknee4x = OAknee3x + midheightrise
+		OAhip5x = OAhip2x
+		OAknee5x = OAknee4x + halfcornerrise
+		OAhip6x = OAhip1x
+		OAknee6x = OAknee5x + halfcornerrise
+		OAhip7x = OAhip0x
+		OAknee7x = OAknee6x
+		OAhip8x = OAhip0x + i*(halfstancestride)
+		OAhip9x = OAhip8x + i*(halfcornerstride)
+		OAknee9x = OAknee5x
+		OAhip10x = OAhip9x + i*(halfcornerstride)
+		OAknee10x = OAknee4x
+		OAhip11x = OAhip10x
+		OAknee11x = OAknee3x
+		OAhip12x = OAhip9x
+		OAknee12x = OAknee2x
+		OAhip13x = OAhip8x
+		OAknee13x = OAknee0x
+
+		OAhip0xr = hipmid
+		OAknee0xr = kneestance + 20
+		OAhip1xr = hipmid - j*(halfstancestride)
+		OAknee1xr = kneestance
+		OAhip2xr = OAhip1xr - j*(halfcornerstride)
+		OAknee2xr = OAknee1xr + halfcornerrise
+		OAhip3xr = OAhip2xr - j*(halfcornerstride)
+		OAknee3xr = OAknee2xr + halfcornerrise
+		OAhip4xr = OAhip3xr
+		OAknee4xr = OAknee3xr + midheightrise
+		OAhip5xr = OAhip2xr
+		OAknee5xr = OAknee4xr + halfcornerrise
+		OAhip6xr = OAhip1xr
+		OAknee6xr = OAknee5xr + halfcornerrise
+		OAhip7xr = OAhip0xr
+		OAknee7xr = OAknee6xr
+		OAhip8xr = OAhip0xr + j*(halfstancestride)
+		OAhip9xr = OAhip8xr + j*(halfcornerstride)
+		OAknee9xr = OAknee5xr
+		OAhip10xr = OAhip9xr + j*(halfcornerstride)
+		OAknee10xr = OAknee4xr
+		OAhip11xr = OAhip10xr
+		OAknee11xr = OAknee3xr
+		OAhip12xr = OAhip9xr
+		OAknee12xr = OAknee2xr
+		OAhip13xr = OAhip8xr
+		OAknee13xr = OAknee0xr
+
+		OAhip0x = hipmid
+		OAknee0v = kneestance - 20
+		OAhip1v = hipmid - i*(halfstancestride)
+		OAknee1v = kneestance
+		OAhip2v = OAhip1v - i*(halfcornerstride)
+		OAknee2v = OAknee1v + halfcornerrise
+		OAhip3v = OAhip2v - i*(halfcornerstride)
+		OAknee3v = OAknee2v + halfcornerrise
+		OAhip4v = OAhip3v
+		OAknee4v = OAknee3v + midheightrise
+		OAhip5v = OAhip2v
+		OAknee5v = OAknee4v + halfcornerrise
+		OAhip6v = OAhip1v
+		OAknee6v = OAknee5v + halfcornerrise
+		OAhip7v = OAhip0v
+		OAknee7v = OAknee6v
+		OAhip8v = OAhip0v + i*(halfstancestride)
+		OAhip9v = OAhip8v + i*(halfcornerstride)
+		OAknee9v = OAknee5v
+		OAhip10v = OAhip9v + i*(halfcornerstride)
+		OAknee10v = OAknee4v
+		OAhip11v = OAhip10v
+		OAknee11v = OAknee3v
+		OAhip12v = OAhip9v
+		OAknee12v = OAknee2v
+		OAhip13v = OAhip8v
+		OAknee13v = OAknee0v
+
+		OAhip0vr = hipmid
+		OAknee0vr = kneestance - 20
+		OAhip1vr = hipmid - j*(halfstancestride)
+		OAknee1vr = kneestance
+		OAhip2vr = OAhip1vr - j*(halfcornerstride)
+		OAknee2vr = OAknee1vr + halfcornerrise
+		OAhip3vr = OAhip2vr - j*(halfcornerstride)
+		OAknee3vr = OAknee2vr + halfcornerrise
+		OAhip4vr = OAhip3vr
+		OAknee4vr = OAknee3vr + midheightrise
+		OAhip5vr = OAhip2vr
+		OAknee5vr = OAknee4vr + halfcornerrise
+		OAhip6vr = OAhip1vr
+		OAknee6vr = OAknee5vr + halfcornerrise
+		OAhip7vr = OAhip0vr
+		OAknee7vr = OAknee6vr
+		OAhip8vr = OAhip0vr + j*(halfstancestride)
+		OAhip9vr = OAhip8vr + j*(halfcornerstride)
+		OAknee9vr = OAknee5vr
+		OAhip10vr = OAhip9vr + j*(halfcornerstride)
+		OAknee10vr = OAknee4vr
+		OAhip11vr = OAhip10vr
+		OAknee11vr = OAknee3vr
+		OAhip12vr = OAhip9vr
+		OAknee12vr = OAknee2vr
+		OAhip13vr = OAhip8vr
+		OAknee13vr = OAknee0vr
+
+
+
+
+
+		#OAhip0 = hipmid
+		#OAknee0 = kneestance + 10
+		#OAhip1 = hipmid - 0.5*i*(halfstancestride)
+		#OAknee1 = kneestance #OAknee0
+		#OAhip2 = hipmid - i*(halfstancestride)
+		#OAknee2 = kneestance #OAknee0
+		#OAhip3 = hipmid - 0.5*i*(halfstancestride)
+		#OAknee3 = kneerise
+		#OAhip4 = OAhip0
+		#OAknee4 = kneestance #OAknee0
+		#OAhip5 = hipmid + 0.5*i*(halfstancestride)
+		#OAknee5 = kneestance
+		#OAhip6 = hipmid + i*(halfstancestride)
+		#OAknee6 = kneestance #OAknee0
+		#OAhip7 = hipmid + 0.5*i*(halfstancestride)
+		#OAknee7 = kneerise #OAknee0
 		
-		OAhip0r = hipmid
-		OAknee0r = kneestance - 10
-		OAhip1r = hipmid - 0.5*j*(halfstancestride)
-		OAknee1r = kneestance #OAknee0r
-		OAhip2r = hipmid - j*(halfstancestride)
-		OAknee2r = kneestance #OAknee0r
-		OAhip3r = hipmid - 0.5*j*(halfstancestride)
-		OAknee3r = kneerise
-		OAhip4r = OAhip0r
-		OAknee4r = kneestance #OAknee0r
-		OAhip5r = hipmid + 0.5*j*(halfstancestride)
-		OAknee5r = kneestance
-		OAhip6r = hipmid + j*(halfstancestride)
-		OAknee6r = kneestance #OAknee0r
-		OAhip7r = hipmid + 0.5*j*(halfstancestride)
-		OAknee7r = kneerise #OAknee0r
+		#OAhip0r = hipmid
+		#OAknee0r = kneestance - 10
+		#OAhip1r = hipmid - 0.5*j*(halfstancestride)
+		#OAknee1r = kneestance #OAknee0r
+		#OAhip2r = hipmid - j*(halfstancestride)
+		#OAknee2r = kneestance #OAknee0r
+		#OAhip3r = hipmid - 0.5*j*(halfstancestride)
+		#OAknee3r = kneerise
+		#OAhip4r = OAhip0r
+		#OAknee4r = kneestance #OAknee0r
+		#OAhip5r = hipmid + 0.5*j*(halfstancestride)
+		#OAknee5r = kneestance
+		#OAhip6r = hipmid + j*(halfstancestride)
+		#OAknee6r = kneestance #OAknee0r
+		#OAhip7r = hipmid + 0.5*j*(halfstancestride)
+		#OAknee7r = kneerise #OAknee0r
 
 		#initialize gait arrays with path segments
 		#hiplist0 = [hip1, hip2, hip3, hip4, hip5, hip6, hip7, hip8, hip9, hip10, hip11, hip12, hip13, hip14]
@@ -268,26 +386,24 @@ def turn_config():
 		hip14t = hip0t
 		knee14t = knee0t
 		
-		if direction == 0:
+		# stance lists
 
-			hiplist0 = [hip0, hip1, hip1, hip1, hip1, hip1, hip2, hip3, hip4, hip5, hip6, hip7, hip8, hip9, hip10, hip11, hip12, hip13] #[hip0,hip1,hip2,hip3]
-			kneelist0 = [knee0, knee1, knee1, knee1, knee1, knee1, knee2, knee3, knee4, knee5, knee6, knee7, knee8, knee9, knee10, knee11, knee12, knee13] #[knee0,knee1,knee2,knee3]
-			hiplist1 = [hip7, hip8, hip9, hip10, hip11, hip12, hip13, hip0, hip1, hip1, hip1, hip1, hip1] #[hip2,hip3,hip0,hip1]
-			kneelist1 = [knee7, knee8, knee9, knee10, knee11, knee12, knee13, knee0, knee1, knee1, knee1, knee1, knee1] #[knee2,knee3,knee0,knee1]
+		hiplist0 = [hip0, hip1, hip1, hip1, hip1, hip1, hip1, hip1, hip1, hip1, hip2, hip3, hip4, hip5, hip6, hip7, hip8, hip9, hip10, hip11, hip12, hip13]
+		kneelist0 = [knee0, knee1, knee1, knee1, knee1, knee1, knee1, knee1, knee1, knee1, knee2, knee3, knee4, knee5, knee6, knee7, knee8, knee9, knee10, knee11, knee12, knee13]
+		hiplist1 = [hip3, hip4, hip5, hip6, hip7, hip8, hip9, hip10, hip11, hip12, hip13, hip0, hip1, hip1, hip1, hip1, hip1, hip1, hip1, hip1, hip1, hip2]
+		kneelist1 = [knee3, knee4, knee5, knee6, knee7, knee8, knee9, knee10, knee11, knee12, knee13, knee0, knee1, knee1, knee1, knee1, knee1, knee1, knee1, knee1, knee1, knee2]
 			
-			hiplist0r = [hip0r, hip1r, hip1, hip1, hip1, hip1, hip2, hip3, hip4, hip5, hip6, hip7, hip8, hip9, hip10, hip11, hip12, hip13] #[hip0,hip1,hip2,hip3]
-			kneelist0r = [knee0, knee1, knee1, knee1, knee1, knee1, knee2, knee3, knee4, knee5, knee6, knee7, knee8, knee9, knee10, knee11, knee12, knee13] #[knee0,knee1,knee2,knee3]
-			hiplist1r = [hip7, hip8, hip9, hip10, hip11, hip12, hip13, hip0, hip1, hip1, hip1, hip1, hip1] #[hip2,hip3,hip0,hip1]
-			kneelist1r = [knee7, knee8, knee9, knee10, knee11, knee12, knee13, knee0, knee1, knee1, knee1, knee1, knee1] #[knee2,knee3,knee0,knee1
+		hiplist0r = [hip0r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip2r, hip3r, hip4r, hip5r, hip6r, hip7r, hip8r, hip9r, hip10r, hip11r, hip12r, hip13r]
+		kneelist0r = [knee0r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee2r, knee3r, knee4r, knee5r, knee6r, knee7r, knee8r, knee9r, knee10r, knee11r, knee12r, knee13r]
+		hiplist1r = [hip3r, hip4r, hip5r, hip6r, hip7r, hip8r, hip9r, hip10r, hip11r, hip12r, hip13r, hip0r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip1r, hip2r]
+		kneelist1r = [knee3r, knee4r, knee5r, knee6r, knee7r, knee8r, knee9r, knee10r, knee11r, knee12r, knee13r, knee0r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee1r, knee2r]
 
-			#hiplist0r = [hip0r,hip1r,hip2r,hip3r]
-			#kneelist0r = [knee0r,knee1r,knee2r,knee3r]
-			#hiplist1r = [hip2r,hip3r,hip0r,hip1r]
-			#kneelist1r = [knee2r,knee3r,knee0r,knee1r]
+
+		if direction == 0:
 
 			while num<=numturns:
 				j = 0
-				while j<=3:
+				while j<=21:
 					hip_move(0,(hiplist0[j],hiplist0[j],(int(hiplist0r[j]))))
 					knee_move(0,(kneelist0[j],kneelist0[j],kneelist0r[j]))
 					hip_move(1,((int(hiplist1[j])),hiplist1r[j],hiplist1r[j]))
@@ -298,20 +414,9 @@ def turn_config():
 
 		if direction == 2:
 
-
-			hiplist0 = [hip0,hip1,hip2,hip3]
-			kneelist0 = [knee0,knee1,knee2,knee3]
-			hiplist1 = [hip2,hip3,hip0,hip1]
-			kneelist1 = [knee2,knee3,knee0,knee1]
-		
-			hiplist0r = [hip0r,hip1r,hip2r,hip3r]
-			kneelist0r = [knee0r,knee1r,knee2r,knee3r]
-			hiplist1r = [hip2r,hip3r,hip0r,hip1r]
-			kneelist1r = [knee2r,knee3r,knee0r,knee1r]
-
 			while num<=numturns:
 				j = 0
-				while j <=3:
+				while j <=21:
 					hip_move(0,(hiplist0r[j],hiplist0r[j],hiplist0[j]))
 					knee_move(0,(kneelist0r[j],kneelist0r[j],kneelist0[j]))
 					hip_move(1,(hiplist1r[j],hiplist1[j],hiplist1[j]))
