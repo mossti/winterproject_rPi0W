@@ -47,6 +47,7 @@ def callback(data):
 	trialnum = 0
 	num = 0
 	while True:
+		rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.buttons)
 		#print('\n(',trialnum,')')
 		#print('\nTurn via rounded rectangular gait.','\nNOTE: safe values at: 90, 30, 90, 60')
 		#print('\n------------------------------------------------------')

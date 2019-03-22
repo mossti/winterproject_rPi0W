@@ -14,18 +14,27 @@ pwm.set_pwm_freq(50)
 
 ts = 0.2
 
-low = 205
+low = 156
 mid = 307
-high = 410
+high = 458
 
 def callback(data):
 	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.buttons)
-	if data.buttons[0] == 1:
-		pwm.set_pwm(1, 0, mid)
-	if data.buttons[3] == 1:
-		pwm.set_pwm(1, 0, low)
-	if data.buttons[1] == 1:
-		pwm.set_pwm(1, 0, high)
+	if data.buttons[14] == 1:
+		for i in range(1,13):
+			while data.buttons[14] != 0:
+				pwm.set_pwm(i, 0, mid)
+				rospy.sleep(0.02)
+	if data.buttons[15] == 1:
+		for j in range(1,13):
+			while data.buttons[15] != 0:
+				pwm.set_pwm(j, 0, low)
+				rospy.sleep(0.02)
+	if data.buttons[13] == 1:
+		for k in range(1,13):
+			while data.buttons[13] != 0:
+				pwm.set_pwm(k, 0, high)
+				rospy.sleep(0.02)
 
 def listener():
 
